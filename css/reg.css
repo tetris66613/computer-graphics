@@ -1,0 +1,30 @@
+body {
+  background: black;
+}
+.regist-blank {
+float: left;
+margin: 5% 10%;
+height: auto;
+width: 80%;
+background: white;
+text-align: center;
+}
+.rb-left {
+float: left;
+margin: 2% 2%;
+height: auto;
+width: 47%;
+background: black;
+text-align: right;
+color: white;
+line-height: 40px;
+}
+.rb-right {
+margin: 2% 51%;
+height: auto;
+width: 47%;
+background: black;
+color: white;
+line-height: 40px;
+text-align: left;
+}

@@ -1,0 +1,72 @@
+body
+{
+  background-image: URL(../I/bg.jpg);
+}
+p
+{
+ text-indent: 20px;
+ font-size: 12pt;
+} 
+h1
+{
+  color: yellow;
+}
+a:link { color: yellow }
+a:visited { color: orange }
+.autorizationNOT
+{
+  margin: 0% 2%;
+  background: rgba(0,0,0,0.5);
+  height: auto; 
+  width: 98%;
+  color: #fff;
+  
+} 
+.siteTitle
+{
+  background: rgba(255,0,4,0.5);
+  margin: 1% 0% 0% 2%;
+  width: 98%;
+  height: 120px;
+  line-height: 1px;
+  color: #fff;
+  text-align: center;
+}
+.STimage
+{
+  float: right;
+  background: black;
+  margin-right: 4%;
+  margin-top: 1%;
+  width: 100px;
+  height: 100px;
+}
+.menuButton
+{
+  float: left;
+  margin-left: 2%;
+  margin-top: 0%;
+  background: rgba(33,33,200, 0.8);
+  height: auto;
+  color: #aaa;
+  width: 23%;
+  font-size: 14pt;
+  text-align: center;
+}
+.menuButton:hover
+{
+  margin-left: 1%;
+  background: rgba(50,50,230,1.0);
+  color: #fff;
+}
+.info
+{
+  float: none;
+  color: #eee;
+  background-image: URL(../I/bginfo.png);
+  margin: 4% 2%;
+  border: 4px solid #000;
+  width: 97%;
+  height: auto;
+}
+  

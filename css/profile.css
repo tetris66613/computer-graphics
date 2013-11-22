@@ -1,0 +1,35 @@
+body {
+	background: white;	
+}
+
+img {
+	width: 150px;
+	height: 150px;
+}
+
+.logo {
+	float: left;
+	margin: 0% 2%; 
+	
+	background: white;
+	width: 150px;
+	height: 150px;
+}
+
+.info {
+	float: left;
+	margin: 0% 1%;	
+	background: white;
+	width: 10%;
+	height: auto;
+	text-align: right;
+}
+
+.values {
+	float: left;
+	margin: 0% 1%;
+	background: white;
+	width: 15%;
+	height: auto;
+}
+

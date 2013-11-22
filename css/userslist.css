@@ -1,0 +1,41 @@
+.body {
+	float: left;
+}
+.admins {
+	margin: 2% 2%;
+	float: left;
+	width: 20%;
+	border: 2px solid yellow;
+	text-align: center;
+}
+
+.editors {
+	margin: 2% 2%;
+	float: left;
+	width: 20%;
+	border: 2px solid yellow;
+	text-align: center;
+}
+
+.users {
+	margin: 2% 2%;
+	float: left;
+	width: 20%;
+	border: 2px solid yellow;
+	text-align: center;
+}
+
+.banned {
+	margin: 2% 2%;
+	float: left;
+	width: 20%;
+	border: 2px solid yellow;
+	text-align: center;
+}
+
+.adminf {
+
+	background: black;
+	margin-left: 10%;
+	width: 80%;
+}
