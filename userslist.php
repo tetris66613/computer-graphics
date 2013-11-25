@@ -22,7 +22,7 @@
         $nick = $value['nickname'];
         echo $value['nickname']; include 'deleteform.php'; echo "<br>";
       } */
-        $db->selectFromWhere('nickname', 'users_info', 'rule', 'admin');
+        $db->selectFromWhere('users_info', 'rule', 'admin');
       ?>
 
     </div>
@@ -40,7 +40,7 @@
         $nick = $value['nickname'];
         echo $value['nickname']; include 'deleteform.php'; echo "<br>";
       } */
-        $db->selectFromWhere('nickname', 'users_info', 'rule', 'editor');
+        $db->selectFromWhere('users_info', 'rule', 'editor');
         
       ?>
 
@@ -59,7 +59,7 @@
         $nick = $value['nickname'];
         echo $value['nickname']; include 'deleteform.php'; echo "<br>";
       } */
-        $db->selectFromWhere('nickname', 'users_info', 'rule', 'user');
+        $db->selectFromWhere('users_info', 'rule', 'user');
       ?>
 
     </div>
@@ -77,7 +77,7 @@
         $nick = $value['nickname'];
         echo $value['nickname']; include 'deleteform.php'; echo "<br>";
       } */
-        $db->selectFromWhere('nickname', 'users_info', 'rule', 'banned');
+        $db->selectFromWhere('users_info', 'rule', 'banned');
       ?>
 
     </div>

@@ -5,9 +5,9 @@
   </HEAD>
   <BODY>
     <form action="edituser.php" method="post">
-      <input type="hidden" name="nick" value=<?php echo $_POST['nick'] ?>>
-    Name: <input type="text" name="admnewname">
-    Surname: <input type="text" name="admnewsurname">
+      <input type="hidden" name="nick" value="<?php echo $_POST['nick'] ?>">
+    Name: <input type="text" name="admnewname" value="<?php echo $_POST['name'] ?>">
+    Surname: <input type="text" name="admnewsurname" value="<?php echo $_POST['surname'] ?>">
     <input type="radio" name="rule" value="admin" 
     <?php if ($_POST['rule'] == 'admin') echo 'checked' ?>>Admin
     <input type="radio" name="rule" value="editor"

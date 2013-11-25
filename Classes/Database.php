@@ -116,14 +116,16 @@
   			}
   		}
   	}
-  	public function selectFromWhere($column, $table, $where, $val) {
-      global $nick, $grule;
-  		$sql = "SELECT $column FROM $table WHERE $where = :w";
+  	public function selectFromWhere($table, $where, $val) {
+      global $nick, $grule, $gname, $gsurname;
+  		$sql = "SELECT nickname, name, surname FROM $table WHERE $where = :w";
   		$q = $this->dbh->prepare($sql);
   		$q->execute(array(':w' => $val));
   		$data = $q->fetchAll();
   		foreach ($data as $key => $value) {
-  			$nick = $value[$column];
+  			$nick = $value['nickname'];
+        $gname = $value['name'];
+        $gsurname = $value['surname'];
         $grule = $val;
   			echo $nick; include 'deleteform.php'; echo "<br>";
 

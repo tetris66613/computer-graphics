@@ -4,5 +4,5 @@
   $id = $_POST['artid'];
  
   $db->deleteArticle($id);
-  header('location: articles.php');
+  header('location: articles.php?page=1');
   ?>
