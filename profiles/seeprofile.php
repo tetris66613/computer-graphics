@@ -12,6 +12,11 @@
     
   </HEAD>
   <BODY>
+    <?php session_start(); if ($_POST['nick'] == $_SESSION['nickname']) {
+      header('location: profile.php');
+      exit();
+    } 
+    ?>
    <center><a href="../index.php">Main page</a><br></center>
     <div class='logo'>
       <?php 
@@ -19,7 +24,7 @@
         if (file_exists($_POST['nick'])) {
           echo "<img src=$img>";
         } else {
-          echo "<img src=../I/logo.jpg";
+          echo "<img src=../I/logo.jpg>";
         }
         ?>
    </div>

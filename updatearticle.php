@@ -40,5 +40,5 @@
   fwrite($article, $text);
   fclose($article);*/
   
-  header('location: articles.php');
+  header("location: articles/article.php?id=$id");
  ?>

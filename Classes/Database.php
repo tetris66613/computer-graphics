@@ -92,7 +92,6 @@
       $pages = (($rows - $rows%10)/10) + 1;
       echo "<div class=pages>";
       for ($i = 1; $i <= $pages; ++$i) {
-        $p = $i;
         include 'pages.php';
       }
       echo "</div>";
