@@ -111,3 +111,8 @@ textarea {
   height: auto;
   text-align: center;
 }
+
+.chooseLang {
+  float: right;
+  
+}

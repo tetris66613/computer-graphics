@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $uploaddir = '/var/www/computer-graphics/profiles/';
+  $uploaddir = '';
  $uploadfile = $uploaddir . $_SESSION['nickname'];
 
 

@@ -11,17 +11,21 @@
   class MySQL_Database extends aDatabase {
   	protected $usersTable;
   	protected $articlesTable;
+    protected $menuTable;
   	protected $Rows;
   	function __construct($u, $p) {
   		$this->user = $u;
   		$this->pass = $p;
   		$this->usersTable = 'users_info';
   		$this->articlesTable = 'articles_info';
+      $this->langTable = 'menu_lang';
   	}
   	public function dbConnect($host, $dbname) {
   		$this->host = $host;
   		$this->dbname = $dbname;
-  		$this->dbh = new PDO("mysql:localhost=$this->host; dbname=$this->dbname", $this->user, $this->pass);
+      $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+  		$this->dbh = new PDO("mysql:localhost=$this->host; dbname=$this->dbname", 
+                           $this->user, $this->pass, $options);
   	}
   	public function addUser($nickname, $password, $email, $name, $surname) {
   		$sql = "INSERT INTO $this->usersTable (nickname, password, email, name, surname) 
@@ -206,6 +210,12 @@
                         ':rule' => $rule,
                         ':nick' => $nick));
 
+    }
+    public function chooseLang($lang) {
+      $sql = "SELECT $lang FROM $this->langTable";
+      $q = $this->dbh->prepare($sql);
+      $q->execute();
+      return($q->fetchAll()); 
     }
   }
  ?>
