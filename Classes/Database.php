@@ -79,22 +79,34 @@
   		$rows = $q->rowCount();
   		return $rows;
   	}
-  	protected function selectColumn($column, $table) {
-  		$sql = "SELECT $column FROM $table";
+  	protected function selectColumn($column, $table, $page) {
+      $v = ($page - 1) * 10;
+  		$sql = "SELECT $column FROM $table LIMIT $v, 10";
   		$q = $this->dbh->prepare($sql);
   		$q->execute();
   		$data = $q->fetchAll(PDO::FETCH_ASSOC);
   		return $data;
   	}
-  	public function makeArticlesList() {
-  		$rows = $this->rowsInTable('articles_info');
-  		if ($rows > 0) {
-  			$title = $this->selectColumn('title', 'articles_info');
-  			$annotation = $this->selectColumn('annotation', 'articles_info');
-  			$nickname = $this->selectColumn('nickname', 'articles_info');
-  			$date = $this->selectColumn('wdate', 'articles_info');
-  			$aid = $this->selectColumn('id', 'articles_info');
-  			for ($i = $rows-1; $i >= 0; --$i) {
+  	public function makeArticlesList($page) {
+      $rows = $this->rowsInTable('articles_info');
+      $pages = (($rows - $rows%10)/10) + 1;
+      echo "<div class=pages>";
+      for ($i = 1; $i <= $pages; ++$i) {
+        $p = $i;
+        include 'pages.php';
+      }
+      echo "</div>";
+      echo "<br>";
+      
+  		$data = $this->selectColumn('title', 'articles_info', $page);
+      $count = count($data);
+  		if ($count > 0) {
+  			$title = $this->selectColumn('title', 'articles_info', $page);
+  			$annotation = $this->selectColumn('annotation', 'articles_info', $page);
+  			$nickname = $this->selectColumn('nickname', 'articles_info', $page);
+  			$date = $this->selectColumn('wdate', 'articles_info', $page);
+  			$aid = $this->selectColumn('id', 'articles_info', $page);
+  			for ($i = 0; $i < $count; ++$i) {
   				$t = $title[$i];
   	            $a = $annotation[$i];
   	            $n = $nickname[$i];
@@ -135,6 +147,9 @@
                         ':ann' => $annotation,
                         ':ft' => $full_text,
                         ':dt' => $date));
+      $last = $this->dbh->lastInsertId();
+      $header = "articles/article.php?id=$last";
+      header("location: $header");
     }
     public function deleteArticle($id) {
       $sql = "DELETE FROM $this->articlesTable WHERE id = :id";

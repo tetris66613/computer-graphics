@@ -40,7 +40,7 @@
   } */
 
   
-  $db->makeArticlesList();
+  $db->makeArticlesList($_GET['page']);
       
       
 ?>

@@ -104,3 +104,10 @@ textarea {
   width: 33px;
   height: auto;
 }
+.pages {
+  background: black;
+  margin: 2%, 2%;
+  width: 96%;
+  height: auto;
+  text-align: center;
+}

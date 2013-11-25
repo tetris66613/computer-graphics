@@ -11,7 +11,7 @@
 
 
 
-<a href="articles.php"><div class="menuButton">
+<a href="articles.php?page=1"><div class="menuButton">
   Articles
 </div></a>
 <a href="aboutsite.php"><div class="menuButton">

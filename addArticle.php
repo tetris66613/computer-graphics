@@ -18,5 +18,5 @@
 
   $db->addArticle($nickname, $title, $annotation, $full_text, $date);
 
-  header("location: articles.php");
+  
  ?>
