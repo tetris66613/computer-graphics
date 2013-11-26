@@ -9,6 +9,9 @@
   </HEAD>
   <BODY>
     <?php
+      //include 'db.php';
+      //$la = $db->chooseLang('en');
+      //print_r($la);
       include 'checkauto.php';
       include 'sitetitle.php';
       include 'maininfo.php';

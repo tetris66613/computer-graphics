@@ -1,9 +1,16 @@
+ <?php 
+  include 'db.php';
+  include 'lang/language.php';
+?>
+
 <!DOCTYPE html>
 
   
-    <a href="articles/article.php?id=<?php echo $ai['id']; ?>"><?php echo $t['title']; ?></a>
+    <a href="articles/article.php?id=<?php echo $ai['id']; ?>">
+      <?php echo $t['title']; ?>
+    </a>
   <br>
-  (Write by 
+  (<?php echo $langdata['20'][$_SESSION['lang']]; ?> 
   <form action="profiles/seeprofile.php" method="post">
       <input type="hidden" name="nick" value="<?php echo $n['nickname']; ?>">
       <input type="submit" name="submit" value="<?php echo $n['nickname']; ?>">
@@ -26,5 +33,7 @@
   <br>
   <?php echo $a['annotation']; ?>
   
-    <a href="articles/article.php?id=<?php echo $ai['id']; ?>">Read more</a>
+    <a href="articles/article.php?id=<?php echo $ai['id']; ?>">
+      <?php echo $langdata['21'][$_SESSION['lang']]; ?>
+    </a>
   <br><br>

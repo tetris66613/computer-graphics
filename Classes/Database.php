@@ -52,7 +52,9 @@
   		$email = $data['email'];
   		if ($stored_password === $password) {
   			if ($rule == 'banned') {
-  				$auth_error = "your are banned and can't log in";
+          global $auth_errorUK, $auth_errorEN;
+  				$auth_errorEN = "your are banned";
+          $auth_errorUK = "ви забанені";
   				include 'index.php';
   			} else {
   				session_start();
@@ -93,9 +95,9 @@
   	}
   	public function makeArticlesList($page) {
       $rows = $this->rowsInTable('articles_info');
-      $pages = (($rows - $rows%10)/10) + 1;
+      $pages = (($rows - $rows%10)/10)+1;
       echo "<div class=pages>";
-      for ($i = 1; $i <= $pages; ++$i) {
+      for ($i = 1; $i <= $pages; $i++) {
         include 'pages.php';
       }
       echo "</div>";

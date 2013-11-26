@@ -1,3 +1,9 @@
+ <?php 
+  session_start();
+  include 'db.php';
+  include 'lang/language.php';
+  ?>
+
 <!DOCTYPE html>
 <HTML>
   <HEAD>
@@ -6,14 +12,15 @@
     <link rel="stylesheet" type="text/css" href="css/reg.css">
   </HEAD>
   <BODY>
+   
     <div class="regist-blank">
       <div class="rb-left">
-        <font color="red">*</font>Nickname:<br>
-        <font color="red">*</font>Password:<br>
-        <font color="red">*</font>Repeat:<br>
-        <font color="red">*</font>E-mail:<br>
-        Name:<br>
-        Surname:
+        <font color="red">*</font><?php echo $langdata['2'][$_SESSION['lang']]; ?>:<br>
+        <font color="red">*</font><?php echo $langdata['1'][$_SESSION['lang']]; ?>:<br>
+        <font color="red">*</font><?php echo $langdata['11'][$_SESSION['lang']]; ?>:<br>
+        <font color="red">*</font><?php echo $langdata['12'][$_SESSION['lang']]; ?>:<br>
+        <?php echo $langdata['13'][$_SESSION['lang']]; ?>:<br>
+        <?php echo $langdata['14'][$_SESSION['lang']]; ?>:
       </div>
       <div class="rb-right">
         <form action="register.php" method="post">
@@ -26,12 +33,21 @@
       </div>
           <font color = "red">
             <?php 
-              global $reg_errors;
-              echo $reg_errors;   
+              switch ($_SESSION['lang']) {
+                case 'en': global $reg_errorsEN;
+                           echo $reg_errorsEN;
+                           break;
+                case 'uk': global $reg_errorsUK;
+                           echo $reg_errorsUK;
+                default: global $reg_errorsEN;
+                           echo $reg_errorsEN;
+                           break;
+              }
+              
             ?>
           </font><br>
           <font color="red">*</font> - this paramater can't be empty<br>
-          <input type="submit" value="Register">
+          <input type="submit" value="<?php echo $langdata['15'][$_SESSION['lang']]; ?>">
         </form> 
     </div> 
   </BODY>

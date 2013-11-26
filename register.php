@@ -9,7 +9,9 @@
   $surname = $_POST['surname'];
 
   if (empty($nickname) || empty($password) || empty($rpassword) || empty($email)) {
-    $reg_errors = "Error: not all *parameters write";
+
+    $reg_errorsEN = 'Error: not all *parameters write';
+    $reg_errorsUK = 'Помилка: не всі *параметри заповнені';
     include 'registration.php';
     exit();
   }
@@ -21,31 +23,36 @@
   $result = $q->fetch();*/
  
   if (!empty($result)) {
-    $reg_errors = "Error: this nickname or email exists";
+    $reg_errorsEN = 'Error: this nickname or email exists';
+    $reg_errorsUK = 'Помилка: цей нік чи електроний адрес занятий';
     include 'registration.php';
     exit();
   }
 
   if (!preg_match("|^[-0-9a-z_\.]+@[-0-9a-z_^\.]+\.[a-z]{2,6}$|i", $email)) {
-    $reg_errors = "E-mail adress wrong";
+    $reg_errorsEN = 'Error: e-mail adress wrong';
+    $reg_errorsUK = 'Помилка: невірно набраний адрес електронної пошти';
     include 'registration.php';
     exit();
   }
 
   if (!ctype_alnum($nickname)) {
-    $reg_errors = "Error: use only alphabets and numbers";
+    $reg_errorsEN = 'Error: in nickname use only alphabets and numbers';
+    $reg_errorsUK = 'Помилка: не всі *параметри заповнені';
     include 'registration.php';
     exit();
   }
 
   if (strlen($password) < 2 || strlen($password) > 12) {
-    $reg_errors = "Error: password length must be in range [2-12]";
+    $reg_errorsEN = 'Error: password length must be in range [2-12]';
+    $reg_errorsUK = 'Помилка: довжина паролю повинна бути в діапазоні від 2 до 12 символів включно';
     include 'registration.php';
     exit();
   }
  
   if ($password != $rpassword) {
-    $reg_errors = "Error: passwords don't similar";
+    $reg_errorsEN = 'Error: passwords don\'t similar';
+    $reg_errorsUK = 'Помилка: паролі не співпадають';
     include 'registration.php';
     exit();
   }

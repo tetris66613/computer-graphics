@@ -2,6 +2,7 @@
 <HTML>
   <HEAD>
     <TITLE>Change info: <?php echo $_POST['nick']; ?></TITLE>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
   </HEAD>
   <BODY>
     <form action="edituser.php" method="post">

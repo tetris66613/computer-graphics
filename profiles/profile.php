@@ -1,7 +1,13 @@
+ <?php 
+  session_start();
+  include '../db.php';
+  include '../lang/language.php';
+  ?>
+
 <!DOCTYPE html>
 <HTML>
   <HEAD>
-    <TITLE>Profile: <?php session_start(); echo $_SESSION['nickname'] ?></TITLE>
+    <TITLE>Profile: <?php echo $_SESSION['nickname'] ?></TITLE>
     
     <link rel='stylesheet' type='text/css' href='../css/profile.css'>
     
@@ -14,21 +20,22 @@
       <form action='changelogo.php' enctype='multipart/form-data' method='post'>
         <input type='hidden' name="id" value="<?php echo $_SESSION['id']; ?>">
         <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
-        Send this file:<input type='file' name='userfile'>
-        <input type='submit' value='change logo'>
+        <?php echo $langdata['18'][$_SESSION['lang']]; ?>:
+        <input type='file' name='userfile'>
+        <input type='submit' value="<?php echo $langdata['17'][$_SESSION['lang']]; ?>">
       </form>
       <form action='../changeuserinfo.php' method='post'>
-        <input type='submit' value='change info'>
+        <input type='submit' value="<?php echo $langdata['16'][$_SESSION['lang']]; ?>">
       </form>
       </center>
   
    </div>
    <div class='info'>
-      Nickname:<br>
-      Rule: <br>
-      E-mail: <br>
-      Name: <br>
-      Surname: 
+      <?php echo $langdata['2'][$_SESSION['lang']]; ?>:<br>
+      <?php echo $langdata['6'][$_SESSION['lang']]; ?>: <br>
+      <?php echo $langdata['12'][$_SESSION['lang']]; ?>: <br>
+      <?php echo $langdata['13'][$_SESSION['lang']]; ?>: <br>
+      <?php echo $langdata['14'][$_SESSION['lang']]; ?>: 
    </div>
    <div class='values'>
       <?php 

@@ -5,17 +5,17 @@
 
 <a href="index.php"> 
 <div class="menuButton">
-  Main
+  <?php echo $langdata['0'][$_SESSION['lang']]; ?>
 </div>
 </a>
 
 
 
 <a href="articles.php?page=1"><div class="menuButton">
-  Articles
+  <?php echo $langdata['10'][$_SESSION['lang']]; ?>
 </div></a>
 <a href="aboutsite.php"><div class="menuButton">
-  About site
+  <?php echo $langdata['3'][$_SESSION['lang']]; ?>
 </div></a>
 
 

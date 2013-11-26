@@ -1,16 +1,22 @@
+ <?php 
+  session_start();
+  include 'db.php';
+  include 'lang/language.php';
+?>
+
 <!DOCTYPE html>
 <HTML>
   <HEAD>
-    <TITLE>Change info: <?php session_start(); echo $_SESSION['nickname']; ?></TITLE>
+    <TITLE>Change info: <?php echo $_SESSION['nickname']; ?></TITLE>
     
    
     
   </HEAD>
   <BODY>
     <form action="profiles/updateuserinfo.php" method="post">
-    Name: <input type="text" name="newname">
-    Surname: <input type="text" name="newsurname">
-    <input type="submit" value="update">
+    <?php echo $langdata['13'][$_SESSION['lang']]; ?>: <input type="text" name="newname">
+    <?php echo $langdata['14'][$_SESSION['lang']]; ?>: <input type="text" name="newsurname">
+    <input type="submit" value="<?php echo $langdata['19'][$_SESSION['lang']]; ?>">
   </form>
      
   </BODY>
