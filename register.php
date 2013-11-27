@@ -12,7 +12,7 @@
 
     $reg_errorsEN = 'Error: not all *parameters write';
     $reg_errorsUK = 'Помилка: не всі *параметри заповнені';
-    include 'registration.php';
+    header('location: registration.php');
     exit();
   }
 
@@ -25,7 +25,7 @@
   if (!empty($result)) {
     $reg_errorsEN = 'Error: this nickname or email exists';
     $reg_errorsUK = 'Помилка: цей нік чи електроний адрес занятий';
-    include 'registration.php';
+    header('location: registration.php');
     exit();
   }
 
@@ -39,21 +39,21 @@
   if (!ctype_alnum($nickname)) {
     $reg_errorsEN = 'Error: in nickname use only alphabets and numbers';
     $reg_errorsUK = 'Помилка: не всі *параметри заповнені';
-    include 'registration.php';
+    header('location: registration.php');
     exit();
   }
 
   if (strlen($password) < 2 || strlen($password) > 12) {
     $reg_errorsEN = 'Error: password length must be in range [2-12]';
     $reg_errorsUK = 'Помилка: довжина паролю повинна бути в діапазоні від 2 до 12 символів включно';
-    include 'registration.php';
+    header('location: registration.php');
     exit();
   }
  
   if ($password != $rpassword) {
     $reg_errorsEN = 'Error: passwords don\'t similar';
     $reg_errorsUK = 'Помилка: паролі не співпадають';
-    include 'registration.php';
+    header('location: registration.php');
     exit();
   }
   /*$sql = "INSERT INTO users_info (nickname, password, email, name, surname) 
@@ -70,6 +70,7 @@
   
   
   include 'userlogin.php';
+  header('location: userlogin.php');
     
   
 ?>

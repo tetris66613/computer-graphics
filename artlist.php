@@ -6,12 +6,19 @@
 <!DOCTYPE html>
 
   
-    <a href="articles/article.php?id=<?php echo $ai['id']; ?>">
-      <?php echo $t['title']; ?>
+    <a href="article.php?id=<?php echo $ai['id']; ?>">
+      <?php 
+        if ($_SESSION['lang'] == 'en') {
+          echo $t['title'];
+        } elseif ($_SESSION['lang'] == 'uk') {
+          echo $t['titleUK'];
+        }
+         
+        ?>
     </a>
   <br>
   (<?php echo $langdata['20'][$_SESSION['lang']]; ?> 
-  <form action="profiles/seeprofile.php" method="post">
+  <form action="seeprofile.php" method="post">
       <input type="hidden" name="nick" value="<?php echo $n['nickname']; ?>">
       <input type="submit" name="submit" value="<?php echo $n['nickname']; ?>">
   </form>
@@ -31,9 +38,15 @@
     [<?php echo $d['wdate']; ?>] 
   </font><br>
   <br>
-  <?php echo $a['annotation']; ?>
+  <?php 
+    if ($_SESSION['lang'] == 'en') {
+          echo $t['title'];
+    } elseif ($_SESSION['lang'] == 'uk') {
+          echo $t['titleUK'];
+    }
+  ?>
   
-    <a href="articles/article.php?id=<?php echo $ai['id']; ?>">
+    <a href="article.php?id=<?php echo $ai['id']; ?>">
       <?php echo $langdata['21'][$_SESSION['lang']]; ?>
     </a>
   <br><br>

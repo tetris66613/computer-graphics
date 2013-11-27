@@ -8,7 +8,7 @@
 <HTML>
   <HEAD>
     <TITLE>Computer Graphics</TITLE> 
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="css/reg.css">
   </HEAD>
   <BODY>

@@ -6,6 +6,9 @@
   $title = $_POST['title'];
   $annotation = $_POST['annotation'];
   $full_text = nl2br($_POST['full_text']);
+  $titleUK = $_POST['titleUK'];
+  $annotationUK = $_POST['annotationUK'];
+  $full_textUK = nl2br($_POST['full_textUK']);
   $date = date("r");
   /*$sql = 'INSERT INTO articles_info (nickname, title, annotation, full_text, wdate) 
   VALUES (:nickname, :title, :annotation, :full_text, :wdate)';
@@ -16,7 +19,6 @@
   	                ':full_text' => $full_text,
                     ':wdate' => $date)); */
 
-  $db->addArticle($nickname, $title, $annotation, $full_text, $date);
-
-  
+  $db->addArticle($nickname, $title, $annotation, $full_text, 
+                  $titleUK, $annotationUK, $full_textUK, $date);
  ?>

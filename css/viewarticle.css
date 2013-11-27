@@ -5,19 +5,4 @@ body {
 
 
 
-.title {
-	background: #ddd;
-	margin: 2% 2%;
-	text-align: center;
-	height: auto;
-	width: 96%;
-}
-.title:hover {
-	background: #fff;
-	
-}
-.text {
-	background: #333;
-	color: #fff;
-	margin: 2% 2%;
-}
+

@@ -1,3 +1,4 @@
+
 <?php
   global $autorize;
   session_start();

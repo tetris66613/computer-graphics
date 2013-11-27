@@ -1,11 +1,11 @@
 <?php
   session_start();
-  $uploaddir = '';
+  $uploaddir = '../';
  $uploadfile = $uploaddir . $_SESSION['nickname'];
 
 
 move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile); 
 
-header("location: profile.php");
+header("location: ../profile.php");
 
 ?>

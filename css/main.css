@@ -70,9 +70,9 @@ a:visited {
 }
 .add-articleYES {
   background-image: URL(../I/bgaddnews.jpg);
-  margin: 1% 2%;
+  margin: 1% 0.1%;
   height: auto;
-  width: 96%;
+  width: 99.8%;
   color: black;
   text-indent: 1%;
 }
@@ -115,4 +115,96 @@ textarea {
 .chooseLang {
   float: right;
   
+}
+.addartEN {
+  float: left;
+  margin: 1% 1%;
+  width: 48.5%;
+  height: auto;
+}
+.addartUK {
+  float: right;
+  margin-top: 1%;
+  margin-right: 1%;
+  width: 48.5%;
+  height: auto;
+}
+.title {
+  background: #ddd;
+  margin: 2% 2%;
+  text-align: center;
+  height: auto;
+  width: 96%;
+}
+.title:hover {
+  background: #fff;
+  
+}
+.text {
+  background: #333;
+  color: #fff;
+  margin: 2% 2%;
+}
+
+
+.logo {
+  float: left;
+  margin: 0% 2%; 
+  overflow: hidden;
+  background: white;
+  width: 150px;
+  height: 150px;
+}
+.logo img {
+  width: 150px;
+  height: 150px;
+}
+
+.pinfo {
+  float: left;
+  margin: 0% 1%;  
+  background: white;
+  width: 10%;
+  height: auto;
+  text-align: right;
+}
+
+.values {
+  float: left;
+  margin: 0% 1%;
+  background: white;
+  width: 15%;
+  height: auto;
+}
+.editTranslate {
+  margin: 1% 1%;
+  float: left;
+  background: #fff;
+  height: auto;
+  width: 98%;
+}
+.translateBlock {
+  background: green;
+  margin: 1% 1%;
+  height: auto;
+  text-align: center;
+  width: 98%;
+}
+.lTB {
+  float: left;
+  background: white;
+  margin: 1% 1%;
+  height: auto;
+  width: 45%;
+  line-height: 33px;
+  text-align: right;
+}
+.rTB {
+  float: left;
+  background: white;
+  margin: 1% 1%;
+  height: auto;
+  width: 45%;
+  line-height: 33px;
+  text-align: left;
 }

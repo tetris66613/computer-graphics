@@ -1,0 +1,36 @@
+body {
+	background: black;
+}
+
+.translateEdit {
+	margin: 1% 1%;
+	float: left;
+	background: #fff;
+	height: auto;
+	width: 98%;
+}
+.translateBlock {
+	background: green;
+	margin: 1% 1%;
+	height: auto;
+	text-align: center;
+	width: 98%;
+}
+.lTB {
+	float: left;
+	background: white;
+	margin: 1% 1%;
+	height: auto;
+	width: 45%;
+	line-height: 33px;
+	text-align: right;
+}
+.rTB {
+	float: left;
+	background: white;
+	margin: 1% 1%;
+	height: auto;
+	width: 45%;
+	line-height: 33px;
+	text-align: left;
+}

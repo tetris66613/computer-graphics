@@ -11,7 +11,7 @@
   class MySQL_Database extends aDatabase {
   	protected $usersTable;
   	protected $articlesTable;
-    protected $menuTable;
+    protected $langTable;
   	protected $Rows;
   	function __construct($u, $p) {
   		$this->user = $u;
@@ -105,22 +105,42 @@
       
   		$data = $this->selectColumn('title', 'articles_info', $page);
       $count = count($data);
-  		if ($count > 0) {
-  			$title = $this->selectColumn('title', 'articles_info', $page);
-  			$annotation = $this->selectColumn('annotation', 'articles_info', $page);
-  			$nickname = $this->selectColumn('nickname', 'articles_info', $page);
-  			$date = $this->selectColumn('wdate', 'articles_info', $page);
-  			$aid = $this->selectColumn('id', 'articles_info', $page);
-  			for ($i = 0; $i < $count; ++$i) {
-  				$t = $title[$i];
-  	            $a = $annotation[$i];
-  	            $n = $nickname[$i];
+      if ($_SESSION['lang'] == 'en') {
+        if ($count > 0) {
+        $title = $this->selectColumn('title', 'articles_info', $page);
+        $annotation = $this->selectColumn('annotation', 'articles_info', $page);
+        $nickname = $this->selectColumn('nickname', 'articles_info', $page);
+        $date = $this->selectColumn('wdate', 'articles_info', $page);
+        $aid = $this->selectColumn('id', 'articles_info', $page);
+        for ($i = 0; $i < $count; ++$i) {
+          $t = $title[$i];
+                $a = $annotation[$i];
+                $n = $nickname[$i];
                 $d = $date[$i];
                 $ai = $aid[$i];
-  	            include 'artlist.php';
-  			}
-  		}
-  	}
+                include 'artlist.php';
+         }
+        }
+      } elseif ($_SESSION['lang'] == 'uk') {
+        if ($count > 0) {
+        $title = $this->selectColumn('titleUK', 'articles_info', $page);
+        $annotation = $this->selectColumn('annotationUK', 'articles_info', $page);
+        $nickname = $this->selectColumn('nickname', 'articles_info', $page);
+        $date = $this->selectColumn('wdate', 'articles_info', $page);
+        $aid = $this->selectColumn('id', 'articles_info', $page);
+        for ($i = 0; $i < $count; ++$i) {
+          $t = $title[$i];
+                $a = $annotation[$i];
+                $n = $nickname[$i];
+                $d = $date[$i];
+                $ai = $aid[$i];
+                include 'artlist.php';
+        }
+        }
+      }
+    }
+                
+
   	public function selectFromWhere($table, $where, $val) {
       global $nick, $grule, $gname, $gsurname;
   		$sql = "SELECT nickname, name, surname FROM $table WHERE $where = :w";
@@ -145,17 +165,21 @@
       $_SESSION['name'] = $newname;
       $_SESSION['surname'] = $newsurname;
     }
-    public function addArticle($nickname, $title, $annotation, $full_text, $date) {
+    public function addArticle($nick, $t, $ann, $ft, $tUK, $annUK, $ftUK, $date) {
       $sql = "INSERT INTO $this->articlesTable 
-      (nickname, title, annotation, full_text, wdate) VALUES (:nick, :title, :ann, :ft, :dt)";
+      (nickname, title, annotation, full_text, titleUK, annotationUK, full_textUK, wdate) 
+      VALUES (:nick, :t, :ann, :ft, :tUK, :annUK, :ftUK, :dt)";
       $q = $this->dbh->prepare($sql);
-      $q->execute(array(':nick' => $nickname,
-                        ':title' => $title,
-                        ':ann' => $annotation,
-                        ':ft' => $full_text,
+      $q->execute(array(':nick' => $nick,
+                        ':t' => $t,
+                        ':ann' => $ann,
+                        ':ft' => $ft,
+                        ':tUK' => $tUK,
+                        ':annUK' => $annUK,
+                        ':ftUK' => $ftUK,
                         ':dt' => $date));
       $last = $this->dbh->lastInsertId();
-      $header = "articles/article.php?id=$last";
+      $header = "article.php?id=$last";
       header("location: $header");
     }
     public function deleteArticle($id) {
@@ -218,6 +242,13 @@
       $q = $this->dbh->prepare($sql);
       $q->execute();
       return($q->fetchAll()); 
+    }
+    public function updateSiteText($val, $newtext) {
+      $l = $_SESSION['lang'];
+      $sql = "UPDATE $this->langTable SET $l = :new WHERE val = :v";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':new' => $newtext,
+                        ':v' => $val));
     }
   }
  ?>
