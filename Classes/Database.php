@@ -95,7 +95,7 @@
   	}
   	public function makeArticlesList($page) {
       $rows = $this->rowsInTable('articles_info');
-      $pages = (($rows - $rows%10)/10)+1;
+      $pages = (($rows - $rows%10)/10) + 1;
       echo "<div class=pages>";
       for ($i = 1; $i <= $pages; $i++) {
         include 'pages.php';
@@ -211,9 +211,10 @@
       $q = $this->dbh->prepare($sql);
       $q->execute(array(':id' => $id));
       $data = $q->fetch();
-      $gtitle = $data['title'];
-      $gdate = $data['wdate'];
-      $gfull_text = $data['full_text'];
+      $gtitle = htmlentities($data['title']);
+      $gdate = htmlentities($data['wdate']);
+      $gfull_text = htmlentities($data['full_text']);
+
     }
     public function showUserInfo($nick) {
       global $grule, $gemail, $gname, $gsurname;
