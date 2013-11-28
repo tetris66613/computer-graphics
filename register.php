@@ -38,7 +38,7 @@
 
   if (strlen($password) < 2 || strlen($password) > 12) {
     $reg_errorsEN = 'Error: password length must be in range [2-12]';
-    $reg_errorsUK = 'Помилка: довжина паролю повинна бути в діапазоні від 2 до 12 символів включно';
+    $reg_errorsUK = 'Помилка: кількість символів паролю повинна бути в діапазоні від 2 до 12 символів включно';
     header('location: registration.php');
     exit();
   }
@@ -55,6 +55,4 @@
   
   include 'userlogin.php';
   header('location: userlogin.php');
-    
-  
 ?>

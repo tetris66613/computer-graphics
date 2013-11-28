@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $uploaddir = '../';
+  $uploaddir = '';
  $uploadfile = $uploaddir . $_SESSION['nickname'];
 
 

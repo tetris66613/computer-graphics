@@ -6,14 +6,13 @@
 <!DOCTYPE html>
 
   
-    <a href="article.php?id=<?php echo $ai['id']; ?>">
+    <a href="article.php?id=<?php echo $ai['id'].'&' ?>
+                         lang=<?php echo $_SESSION['lang'].'&' ?>
+                         page=1">
       <?php 
-        if ($_SESSION['lang'] == 'en') {
-          echo $t['title'];
-        } elseif ($_SESSION['lang'] == 'uk') {
-          echo $t['titleUK'];
-        }
-         
+        
+        echo $t;
+        
         ?>
     </a>
   <br>
@@ -39,14 +38,15 @@
   </font><br>
   <br>
   <?php 
-    if ($_SESSION['lang'] == 'en') {
-          echo $t['title'];
-    } elseif ($_SESSION['lang'] == 'uk') {
-          echo $t['titleUK'];
-    }
+    echo $a;
+    
+    
+   
+       
+   
   ?>
   
-    <a href="article.php?id=<?php echo $ai['id']; ?>">
-      <?php echo $langdata['21'][$_SESSION['lang']]; ?>
-    </a>
+    <a href="article.php?id=<?php echo $ai['id'].'&' ?>
+                         lang=<?php echo $_SESSION['lang'].'&' ?>
+                         page=1">Read more</a>
   <br><br>

@@ -1,8 +1,3 @@
-<?php
-    include 'db.php';
-    $db->showArticle($_GET['id']);
- ?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,13 +10,24 @@
     <?php
       include 'checkauto.php';
       include 'sitetitle.php';
+      include 'db.php';
+      $db->showArticle($_GET['id'], $_SESSION['lang']);
     ?>
     <div class='title'>
     <?php echo $gtitle ?><br>
     <?php echo $gdate ?><br>
     </div>
     <div class='text'>
-    <?php echo $gfull_text ?><br>
+      <?php 
+        echo $gfull_text; 
+      ?><br>
     </div>
+    <?php
+     
+      if (!empty($_SESSION['rule'])) {
+        include 'commentform.php';
+      }  
+      include 'comment.php';
+    ?>
   </body>
 </html>

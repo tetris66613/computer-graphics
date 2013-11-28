@@ -208,3 +208,9 @@ textarea {
   line-height: 33px;
   text-align: left;
 }
+.comments {
+  margin: 1% 2%;
+  background: #ddd;
+  width:96%;
+  height: auto;
+}

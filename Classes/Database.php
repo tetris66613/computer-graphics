@@ -12,6 +12,7 @@
   	protected $usersTable;
   	protected $articlesTable;
     protected $langTable;
+    protected $commentTable;
   	protected $Rows;
   	function __construct($u, $p) {
   		$this->user = $u;
@@ -19,6 +20,7 @@
   		$this->usersTable = 'users_info';
   		$this->articlesTable = 'articles_info';
       $this->langTable = 'menu_lang';
+      $this->commentTable = 'comments';
   	}
   	public function dbConnect($host, $dbname) {
   		$this->host = $host;
@@ -113,12 +115,14 @@
         $date = $this->selectColumn('wdate', 'articles_info', $page);
         $aid = $this->selectColumn('id', 'articles_info', $page);
         for ($i = 0; $i < $count; ++$i) {
-          $t = $title[$i];
-                $a = $annotation[$i];
-                $n = $nickname[$i];
-                $d = $date[$i];
-                $ai = $aid[$i];
-                include 'artlist.php';
+          $ti = $title[$i];
+          $an = $annotation[$i];
+          $t = htmlentities($ti['title']);
+          $a = htmlentities($an['annotation']);
+          $n = $nickname[$i];
+          $d = $date[$i];
+          $ai = $aid[$i];
+          include 'artlist.php';
          }
         }
       } elseif ($_SESSION['lang'] == 'uk') {
@@ -129,12 +133,14 @@
         $date = $this->selectColumn('wdate', 'articles_info', $page);
         $aid = $this->selectColumn('id', 'articles_info', $page);
         for ($i = 0; $i < $count; ++$i) {
-          $t = $title[$i];
-                $a = $annotation[$i];
-                $n = $nickname[$i];
-                $d = $date[$i];
-                $ai = $aid[$i];
-                include 'artlist.php';
+          $ti = $title[$i];
+          $an = $annotation[$i];
+          $t = htmlentities($ti['titleUK']);
+          $a = htmlentities($an['annotationUK']);
+          $n = $nickname[$i];
+          $d = $date[$i];
+          $ai = $aid[$i];
+          include 'artlist.php';
         }
         }
       }
@@ -204,17 +210,37 @@
                         ':ft' => $f,
                         ':id' => $id));
     }
-    public function showArticle($id) {
+    public function showArticle($id, $lang) {
       global $gtitle, $gdate, $gfull_text;
-      $sql = "SELECT title, wdate, full_text FROM $this->articlesTable
-      WHERE id = :id";
-      $q = $this->dbh->prepare($sql);
-      $q->execute(array(':id' => $id));
-      $data = $q->fetch();
-      $gtitle = htmlentities($data['title']);
-      $gdate = htmlentities($data['wdate']);
-      $gfull_text = htmlentities($data['full_text']);
-
+      switch ($lang) {
+        case 'en': $sql = "SELECT title, wdate, full_text FROM $this->articlesTable
+                   WHERE id = :id";
+                   $q = $this->dbh->prepare($sql);
+                   $q->execute(array(':id' => $id));
+                   $data = $q->fetch();
+                   $gtitle = htmlentities($data['title']);
+                   $gdate = htmlentities($data['wdate']);
+                   $gfull_text = htmlentities($data['full_text']);
+                   break;
+        case 'uk': $sql = "SELECT titleUK, wdate, full_textUK FROM $this->articlesTable
+                   WHERE id = :id";
+                   $q = $this->dbh->prepare($sql);
+                   $q->execute(array(':id' => $id));
+                   $data = $q->fetch();
+                   $gtitle = htmlentities($data['titleUK']);
+                   $gdate = htmlentities($data['wdate']);
+                   $gfull_text = htmlentities($data['full_textUK']);
+                   break;
+        default: $sql = "SELECT title, wdate, full_text FROM $this->articlesTable
+                 WHERE id = :id";
+                 $q = $this->dbh->prepare($sql);
+                 $q->execute(array(':id' => $id));
+                 $data = $q->fetch();
+                 $gtitle = htmlentities($data['title']);
+                 $gdate = htmlentities($data['wdate']);
+                 $gfull_text = htmlentities($data['full_text']);
+                 break;
+      }
     }
     public function showUserInfo($nick) {
       global $grule, $gemail, $gname, $gsurname;
@@ -250,6 +276,56 @@
       $q = $this->dbh->prepare($sql);
       $q->execute(array(':new' => $newtext,
                         ':v' => $val));
+    }
+    public function addComment($artId, $nick, $theme, $text, $cdate) {
+      $l = $_SESSION['lang'];
+      $sql = "INSERT INTO $this->commentTable"."$l"." (nick, theme, cText, artId, cdate) 
+      VALUES (:n, :th, :tx, :ai, :dt)";
+     
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':n' => $nick,
+                        ':th' => $theme,
+                        ':tx' => $text,
+                        ':ai' => $artId,
+                        ':dt' => $cdate));
+    }
+    public function makeCommentsList($page) {
+      $l = $_SESSION['lang'];
+      $table = $this->commentTable.$l;
+      $rows = $this->rowsInTable($table);
+      $pages = (($rows - $rows%10)/10) + 1;
+      echo "<div class=pages>";
+      for ($i = 1; $i <= $pages; $i++) {
+        include 'pages.php';
+      }
+      echo "</div>";
+      echo "<br>";
+      
+      $data = $this->selectColumn('nick', $table, $page);
+      $count = count($data);
+      
+        if ($count > 0) {
+        $theme = $this->selectColumn('theme', $table, $page);
+        $ctext = $this->selectColumn('ctext', $table, $page);
+        $nickname = $this->selectColumn('nick', $table, $page);
+        $date = $this->selectColumn('cdate', $table, $page);
+        $cid = $this->selectColumn('id', $table, $page);
+        for ($i = 0; $i < $count; ++$i) {
+          $th = $theme[$i];
+          $ct = $ctext[$i];
+          $t = htmlentities($th['theme']);
+          $c = htmlentities($ct['ctext']);
+          $n = $nickname[$i];
+          $d = $date[$i];
+          $ci = $cid[$i];
+          include 'comlist.php';
+         }
+        }   
+    }
+    public function deleteComment($id) {
+      $sql = "DELETE FROM $this->commentTable".$_SESSION['lang']." WHERE id = :id";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':id' => $id));
     }
   }
  ?>
