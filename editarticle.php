@@ -18,11 +18,6 @@
 		<textarea name="full_text" rows="25" cols="100">
 			<?php
 			  include 'db.php';
-			  /*$sql = 'SELECT full_text FROM articles_info WHERE id = :id';
-			  $q = $dbh->prepare($sql);
-			  $q->execute(array(':id' => $_POST['artid']));
-			  $data = $q->fetch();
-			  $full_text = $data['0'];*/
 			  $db->editArticle($_POST['artid']);
 			  include 'func.php';
 			  echo br2nl($full_text);

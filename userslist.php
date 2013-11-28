@@ -14,14 +14,7 @@
 
       <?php
         include 'db.php';
-        /*$sql = 'SELECT nickname FROM users_info WHERE rule = :rule';
-        $q = $dbh->prepare($sql);
-        $q->execute(array(':rule' => 'admin'));
-        $data = $q->fetchAll();  
-        foreach ($data as $key => $value) {
-        $nick = $value['nickname'];
-        echo $value['nickname']; include 'deleteform.php'; echo "<br>";
-      } */
+        
         $db->selectFromWhere('users_info', 'rule', 'admin');
       ?>
 
@@ -32,14 +25,7 @@
 
       <?php
         include 'db.php';
-        /*$sql = 'SELECT nickname FROM users_info WHERE rule = :rule';
-        $q = $dbh->prepare($sql);
-        $q->execute(array(':rule' => 'editor'));
-        $data = $q->fetchAll();  
-        foreach ($data as $key => $value) {
-        $nick = $value['nickname'];
-        echo $value['nickname']; include 'deleteform.php'; echo "<br>";
-      } */
+        
         $db->selectFromWhere('users_info', 'rule', 'editor');
         
       ?>
@@ -51,14 +37,7 @@
 
       <?php
         include 'db.php';
-        /*$sql = 'SELECT nickname FROM users_info WHERE rule = :rule';
-        $q = $dbh->prepare($sql);
-        $q->execute(array(':rule' => 'user'));
-        $data = $q->fetchAll();  
-        foreach ($data as $key => $value) {
-        $nick = $value['nickname'];
-        echo $value['nickname']; include 'deleteform.php'; echo "<br>";
-      } */
+        
         $db->selectFromWhere('users_info', 'rule', 'user');
       ?>
 
@@ -69,14 +48,7 @@
 
       <?php
         include 'db.php';
-        /*$sql = 'SELECT nickname FROM users_info WHERE rule = :rule';
-        $q = $dbh->prepare($sql);
-        $q->execute(array(':rule' => 'banned'));
-        $data = $q->fetchAll();  
-        foreach ($data as $key => $value) {
-        $nick = $value['nickname'];
-        echo $value['nickname']; include 'deleteform.php'; echo "<br>";
-      } */
+        
         $db->selectFromWhere('users_info', 'rule', 'banned');
       ?>
 

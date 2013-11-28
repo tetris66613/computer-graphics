@@ -15,13 +15,6 @@
     header('location: registration.php');
     exit();
   }
-
-  /*$sql = 'SELECT * FROM users_info WHERE nickname = :nickname OR email = :email';
-  $q = $dbh->prepare($sql);
-  $q->execute(array(':nickname' => $nickname,
-                    ':email' => $email));
-  $result = $q->fetch();*/
- 
   if (!empty($result)) {
     $reg_errorsEN = 'Error: this nickname or email exists';
     $reg_errorsUK = 'Помилка: цей нік чи електроний адрес занятий';
@@ -56,15 +49,6 @@
     header('location: registration.php');
     exit();
   }
-  /*$sql = "INSERT INTO users_info (nickname, password, email, name, surname) 
-  VALUES (:nickname, :password, :email, :name, :surname)";
-  $q = $dbh->prepare($sql);
-  $q->execute(array(':nickname' => $nickname,
-                    ':password' => $password,
-                    ':email' => $email,
-                    ':name' => $name,
-                    ':surname' => $surname));*/
-
   $db->addUser($nickname, $password, $email, $name, $surname);
 
   
