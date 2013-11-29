@@ -5,10 +5,10 @@
 	<input type="hidden" name="artt" value="<?php  echo $t['title']; ?>">
 	<input type="hidden" name="arta" value="<?php  echo $a['annotation']; ?>">
 	
-	<input type="submit" value="edit">
+	<input type="submit" value="<?php echo $langdata['24'][$_SESSION['lang']] ?>">
 </form>
 
 <form action="deletearticle.php" method="post">
 	<input type='hidden' name="artid" value="<?php echo $ai['id']; ?>">
-	<input type='submit' value='delete'>
+	<input type='submit' value="<?php echo $langdata['23'][$_SESSION['lang']] ?>">
 </form>

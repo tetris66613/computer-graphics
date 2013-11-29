@@ -4,7 +4,7 @@
    include 'lang/language.php';
    
   $artId = $_POST['artId'];
-  $date = date("r");
+  $date = date("c");
   $db->addComment($artId, $_POST['nick'], $_POST['theme'], $_POST['text'], $date);
   
 

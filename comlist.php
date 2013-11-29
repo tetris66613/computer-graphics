@@ -10,14 +10,24 @@
   echo $t;
   echo "<br>";
   echo $d['cdate'];
-  echo "<br>";
-  if ($_SESSION['rule'] == 'admin') {
+  ?>
+
+   <form action="seeprofile.php" method="post">
+     <input type="hidden" name="nick" value="<?php echo $n['nick'] ?>">
+     <input type="submit" value="<?php echo $n['nick'] ?>">
+   </form>
+
+<?php
+  
+  if (!empty($_SESSION['rule'])) {
+    if ($_SESSION['rule'] == 'admin') {
   	include 'admdelcomment.php';
+    }
   }
   
   ?>
   </center>
-  <?php 
+  <?php
     echo $c;
    ?>
 <br>

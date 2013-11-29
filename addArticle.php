@@ -9,7 +9,7 @@
   $titleUK = $_POST['titleUK'];
   $annotationUK = $_POST['annotationUK'];
   $full_textUK = $_POST['full_textUK'];
-  $date = date("r");
+  $date = date("c");
   $db->addArticle($nickname, $title, $annotation, $full_text, 
                   $titleUK, $annotationUK, $full_textUK, $date);
  ?>
