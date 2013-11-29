@@ -13,6 +13,7 @@
   	protected $articlesTable;
     protected $langTable;
     protected $commentTable;
+    protected $rateTable;
   	protected $Rows;
   	function __construct($u, $p) {
   		$this->user = $u;
@@ -21,6 +22,7 @@
   		$this->articlesTable = 'articles_info';
       $this->langTable = 'menu_lang';
       $this->commentTable = 'comments';
+      $this->rateTable = 'art_ratings';
   	}
   	public function dbConnect($host, $dbname) {
   		$this->host = $host;
@@ -29,6 +31,14 @@
   		$this->dbh = new PDO("mysql:localhost=$this->host; dbname=$this->dbname", 
                            $this->user, $this->pass, $options);
   	}
+    public function checkUserExists($nick, $email) {
+      $sql = "SELECT * FROM $this->usersTable WHERE nickname = :n OR email = :e";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':n' => $nick,
+                        ':e' => $email));
+      return($q->fetch());
+
+    }
   	public function addUser($nickname, $password, $email, $name, $surname) {
   		$sql = "INSERT INTO $this->usersTable (nickname, password, email, name, surname) 
         VALUES (:nickname, :password, :email, :name, :surname)";
@@ -211,9 +221,9 @@
                         ':id' => $id));
     }
     public function showArticle($id, $lang) {
-      global $gtitle, $gdate, $gfull_text;
+      global $gtitle, $gdate, $gfull_text, $gRate;
       switch ($lang) {
-        case 'en': $sql = "SELECT title, wdate, full_text FROM $this->articlesTable
+        case 'en': $sql = "SELECT title, wdate, full_text, avrRate FROM $this->articlesTable
                    WHERE id = :id";
                    $q = $this->dbh->prepare($sql);
                    $q->execute(array(':id' => $id));
@@ -221,8 +231,9 @@
                    $gtitle = htmlentities($data['title']);
                    $gdate = htmlentities($data['wdate']);
                    $gfull_text = htmlentities($data['full_text']);
+                   $gRate = $data['avrRate'];
                    break;
-        case 'uk': $sql = "SELECT titleUK, wdate, full_textUK FROM $this->articlesTable
+        case 'uk': $sql = "SELECT titleUK, wdate, full_textUK, avrRate FROM $this->articlesTable
                    WHERE id = :id";
                    $q = $this->dbh->prepare($sql);
                    $q->execute(array(':id' => $id));
@@ -230,8 +241,9 @@
                    $gtitle = htmlentities($data['titleUK']);
                    $gdate = htmlentities($data['wdate']);
                    $gfull_text = htmlentities($data['full_textUK']);
+                   $gRate = $data['avrRate'];
                    break;
-        default: $sql = "SELECT title, wdate, full_text FROM $this->articlesTable
+        default: $sql = "SELECT title, wdate, full_text, avrRate FROM $this->articlesTable
                  WHERE id = :id";
                  $q = $this->dbh->prepare($sql);
                  $q->execute(array(':id' => $id));
@@ -239,7 +251,7 @@
                  $gtitle = htmlentities($data['title']);
                  $gdate = htmlentities($data['wdate']);
                  $gfull_text = htmlentities($data['full_text']);
-                 break;
+                 $gRate = $data['avrRate'];
       }
     }
     public function showUserInfo($nick) {
@@ -296,7 +308,7 @@
       $pages = (($rows - $rows%10)/10) + 1;
       echo "<div class=pages>";
       for ($i = 1; $i <= $pages; $i++) {
-        include 'pages.php';
+        include 'cpages.php';
       }
       echo "</div>";
       echo "<br>";
@@ -326,6 +338,32 @@
       $sql = "DELETE FROM $this->commentTable".$_SESSION['lang']." WHERE id = :id";
       $q = $this->dbh->prepare($sql);
       $q->execute(array(':id' => $id));
+    }
+    protected function assumeArtRate($id) {
+      $sql = "SELECT SUM(rate) FROM $this->rateTable WHERE artid = :id";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':id' => $id));
+      return($q->fetch());
+    }
+    public function rateArticle($artid, $nick, $rate) {
+      $sql = "INSERT INTO $this->rateTable (artId, nick, rate) 
+      VALUES (:a, :n, :r)";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(
+        ':a' => $artid,
+        ':n' => $nick,
+        ':r' => $rate));
+      $sql = "SELECT rate FROM $this->rateTable WHERE artid = :id";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':id' => $artid));
+      $rRows = $q->rowCount();
+      $sume = $this->assumeArtRate($artid);
+      $avrRate = $sume['0']/$rRows;
+      $sql = "UPDATE $this->articlesTable SET avrRate = :ar WHERE id = :id";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(
+        ':ar' => $avrRate,
+        ':id' => $artid));
     }
   }
  ?>

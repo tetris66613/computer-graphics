@@ -1,0 +1,1 @@
+<a href="article.php?page=<?php echo $i ?>"><?php echo "$i" ?></a>&nbsp&nbsp

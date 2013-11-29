@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <HTML>
   <HEAD>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <TITLE>Change info: <?php echo $_SESSION['nickname']; ?></TITLE>
     
    

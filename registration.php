@@ -24,12 +24,12 @@
       </div>
       <div class="rb-right">
         <form action="register.php" method="post">
-          <input type="text" name="nickname" size="18"><br>
+          <input type="text" name="nickname" value="<?php global $nickname; echo $nickname ?>" size="18"><br>
           <input type="password" name="password" size="18"><br>
           <input type="password" name="rpassword" size="18"><br>
-          <input type="text" name="email" size="18"><br>
-          <input type="text" name="name" size="18"><br>
-          <input type="text" name="surname" size="18">
+          <input type="text" name="email" value="<?php global $email; echo $email ?>" size="18"><br>
+          <input type="text" name="name" value="<?php global $name; echo $name ?>" size="18"><br>
+          <input type="text" name="surname" value="<?php global $surname; echo $surname ?>" size="18">
       </div>
           <font color = "red">
             <?php 
@@ -39,6 +39,7 @@
                            break;
                 case 'uk': global $reg_errorsUK;
                            echo $reg_errorsUK;
+                           break;
                 default: global $reg_errorsEN;
                            echo $reg_errorsEN;
                            break;

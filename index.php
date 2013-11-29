@@ -12,6 +12,7 @@
       include 'checkauto.php';
       include 'sitetitle.php';
       include 'maininfo.php';
+      $_SESSION['curpage'] = "index.php";
      ?>
   </BODY>
 </HTML>

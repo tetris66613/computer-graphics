@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <HTML>
   <HEAD>
-    <TITLE>Profile: username</TITLE>
+    <TITLE>Profile</TITLE>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel='stylesheet' type='text/css' href='css/main.css'>
     
@@ -24,11 +24,11 @@
         ?>
    </div>
    <div class='pinfo'>
-      Nickname:<br>
-      Rule: <br>
-      E-mail: <br>
-      Name: <br>
-      Surname: 
+     <?php echo $langdata['2'][$_SESSION['lang']]; ?>:<br>
+      <?php echo $langdata['6'][$_SESSION['lang']]; ?>: <br>
+      <?php echo $langdata['12'][$_SESSION['lang']]; ?>: <br>
+      <?php echo $langdata['13'][$_SESSION['lang']]; ?>: <br>
+      <?php echo $langdata['14'][$_SESSION['lang']]; ?>: 
    </div>
    <div class='values'>
       <?php echo $_POST['nick'] ?> <br>

@@ -20,5 +20,5 @@
   $db->updateUserInfo($newname, $newsurname, $nickname);
  
   
-  header("location: profile.php");
+  header("location: ../profile.php");
  ?>

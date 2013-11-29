@@ -46,7 +46,7 @@
    
   ?>
   
-    <a href="article.php?id=<?php echo $ai['id'].'&' ?>
+     <a href="article.php?id=<?php echo $ai['id'].'&' ?>
                          lang=<?php echo $_SESSION['lang'].'&' ?>
                          page=1">Read more</a>
   <br><br>

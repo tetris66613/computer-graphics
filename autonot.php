@@ -2,8 +2,9 @@
 
 <div class="autorizationNOT">
 	<div class="chooseLang">
-      <a href="index.php?glang=en"><img src="lang/uk.gif" width="33px" height="20px"></a>
-	  <a href="index.php?glang=uk"><img src="lang/ua.gif" width="33px" height="20px"></a>
+    <a href="?glang=en"><img src="lang/uk.gif" width="33px" height="20px"></a>
+     
+	  <a href="?glang=uk"><img src="lang/ua.gif" width="33px" height="20px"></a>
     </div>
   <form action="userlogin.php" method="post">
     <?php echo $langdata['2'][$_SESSION['lang']]; ?>

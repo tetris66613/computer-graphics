@@ -18,6 +18,6 @@
       include 'sitesettingsbutton.php';
     } 
       ?>
-  <a href="index.php?glang=en"><img src="lang/uk.gif" width="33px" height="20px"></a>
-  <a href="index.php?glang=uk"><img src="lang/ua.gif" width="33px" height="20px"></a>
+  <a href="?glang=en"><img src="lang/uk.gif" width="33px" height="20px"></a>
+  <a href="?glang=uk"><img src="lang/ua.gif" width="33px" height="20px"></a>
 </div></center>
