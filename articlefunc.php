@@ -2,8 +2,8 @@
 
 <form action="editarticle.php" method="post">
 	<input type="hidden" name="artid" value="<?php  echo $ai['id']; ?>">
-	<input type="hidden" name="artt" value="<?php  echo $t['title']; ?>">
-	<input type="hidden" name="arta" value="<?php  echo $a['annotation']; ?>">
+	<input type="hidden" name="artt" value="<?php  echo $t; ?>">
+	<input type="hidden" name="arta" value="<?php  echo $a; ?>">
 	
 	<input type="submit" value="<?php echo $langdata['24'][$_SESSION['lang']] ?>">
 </form>

@@ -1,1 +1,1 @@
-<a href="article.php?page=<?php echo $i ?>"><?php echo "$i" ?></a>&nbsp&nbsp
+<a href="?id=<?php echo $_GET['id']?>&page=<?php echo $i; ?>"><?php echo "$i" ?></a>&nbsp&nbsp

@@ -211,14 +211,28 @@
       $data = $q->fetch();
       $full_text = $data['0'];
     }
-    public function updateArticle($t, $a, $f, $id) {
-      $sql = "UPDATE $this->articlesTable 
-      SET title = :title, annotation = :ann, full_text = :ft WHERE id = :id";
-      $q = $this->dbh->prepare($sql);
-      $q->execute(array(':title' => $t,
-                        ':ann' => $a,
-                        ':ft' => $f,
-                        ':id' => $id));
+    public function updateArticle($t, $a, $f, $id, $lang) {
+      switch ($lang) {
+        case 'en': $sql = "UPDATE $this->articlesTable 
+                   SET title = :ti, annotation = :an, full_text = :ft WHERE id = :id";
+                   $q = $this->dbh->prepare($sql);
+                   $q->execute(array(
+                    ':ti' => $t,
+                    ':an' => $a,
+                    ':ft' => $f,
+                    ':id' => $id));
+                   break;
+        case 'uk': $sql = "UPDATE $this->articlesTable 
+                   SET titleUK = :ti, annotationUK = :an, full_textUK = :ft WHERE id = :id";
+                   $q = $this->dbh->prepare($sql);
+                   $q->execute(array(
+                    ':ti' => $t,
+                    ':an' => $a,
+                    ':ft' => $f,
+                    ':id' => $id));
+                   break;
+        default: echo "error";
+      }
     }
     public function showArticle($id, $lang) {
       global $gtitle, $gdate, $gfull_text, $gRate;
@@ -306,12 +320,7 @@
       $table = $this->commentTable.$l;
       $rows = $this->rowsInTable($table);
       $pages = (($rows - $rows%10)/10) + 1;
-      echo "<div class=pages>";
-      for ($i = 1; $i <= $pages; $i++) {
-        include 'cpages.php';
-      }
-      echo "</div>";
-      echo "<br>";
+      
       
       $data = $this->selectColumn('nick', $table, $page);
       $count = count($data);
@@ -332,7 +341,13 @@
           $ci = $cid[$i];
           include 'comlist.php';
          }
-        }   
+        }  
+        echo "<div class=pages>";
+      for ($i = 1; $i <= $pages; $i++) {
+        include 'cpages.php';
+      }
+      echo "</div>";
+      echo "<br>"; 
     }
     public function deleteComment($id) {
       $sql = "DELETE FROM $this->commentTable".$_SESSION['lang']." WHERE id = :id";
@@ -364,6 +379,14 @@
       $q->execute(array(
         ':ar' => $avrRate,
         ':id' => $artid));
+    }
+    public function checkRate($nickname, $artid) {
+      $sql = "SELECT rate FROM $this->rateTable WHERE artid = :id AND nick = :n";
+      $q = $this->dbh->prepare($sql); 
+      $q->execute(array(
+        ':id' => $artid,
+        ':n' => $nickname));
+      return($q->fetch());
     }
   }
  ?>

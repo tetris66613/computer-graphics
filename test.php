@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<HTML>
-  <HEAD>
-    <TITLE>Profile: username</TITLE>
-    
-    
-  </HEAD>
-  <BODY>
-    
 <?php
-    include 'db.php';
   
-        
-        $sql = 'SELECT rule, name, surname FROM users_info WHERE nickname = :nickname';
-        $q = $dbh->prepare($sql);
-        $q->execute(array(':nickname' => 'ad'));
-        $data = $q->fetch();
-  print_r($data)
-
- ?>
-      
-
-  </BODY>
-</HTML>
+  include 'db.php';
+  $d = $db->checkRate('ad', '156');
+  print_r($d);
+  ?>

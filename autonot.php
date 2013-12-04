@@ -2,9 +2,21 @@
 
 <div class="autorizationNOT">
 	<div class="chooseLang">
-    <a href="?glang=en"><img src="lang/uk.gif" width="33px" height="20px"></a>
+    <a href="?glang=en&page=1&
+    <?php 
+      if (isset($_GET['id'])) 
+      { 
+        echo 'id='.$_GET['id']; 
+      }
+    ?>"><img src="lang/uk.gif" width="33px" height="20px"></a>
      
-	  <a href="?glang=uk"><img src="lang/ua.gif" width="33px" height="20px"></a>
+	 <a href="?glang=uk&page=1&
+    <?php 
+      if (isset($_GET['id'])) 
+      { 
+        echo 'id='.$_GET['id']; 
+      }
+    ?>"><img src="lang/ua.gif" width="33px" height="20px"></a>
     </div>
   <form action="userlogin.php" method="post">
     <?php echo $langdata['2'][$_SESSION['lang']]; ?>

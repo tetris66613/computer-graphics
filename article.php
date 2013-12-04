@@ -18,30 +18,36 @@
         <?php echo $gtitle; ?><br>
         <?php echo $gdate; ?><br>
       </center>
-     Average rate: <?php echo $gRate; ?>
+     Average rate: <?php 
+                     if ($gRate) {
+                      echo $gRate;
+                     } else {
+                      echo "any don't rate this article";
+                     }
+                     echo "<br>";
+                     echo $gfull_text; 
+                    ?>
 
 
     </div>
-    <div class='text'>
-      <?php 
-        echo $gfull_text; 
-      ?><br>
-      <form action="artRate.php" method="get">
-        <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-        <input type="radio" name="rate" value="1">1
-        <input type="radio" name="rate" value="2">2
-        <input type="radio" name="rate" value="3">3
-        <input type="radio" name="rate" value="4">4
-        <input type="radio" name="rate" value="5">5
-        <input type="submit" value="Rate">
-      </form>
-    </div>
+    
     <?php
-     
-      if (!empty($_SESSION['rule'])) {
+      if (isset($_SESSION['nickname'])) {
+        $urate = $db->checkRate($_SESSION['nickname'], $_GET['id']);   
+      }
+      
+      if (empty($_SESSION['rule'])) {
+        include 'comment.php';
+      } elseif (!empty($_SESSION['rule']) && !empty($urate['rate'])) {
         include 'commentform.php';
-      }  
-      include 'comment.php';
+
+        echo "Your rate: " . $urate['rate'];
+        include 'comment.php';
+      } elseif (!empty($_SESSION['rule']) && empty($urate['rate'])) {
+        include 'commentform.php';
+        include 'rate.php';
+        include 'comment.php';
+      }
     ?>
   </body>
 </html>
