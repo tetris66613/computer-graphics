@@ -26,7 +26,12 @@
                      }
                      echo "<br>";
                      echo $gfull_text; 
+                     if ($_SESSION['rule'] == 'admin') {
+                       include 'deleteArtRatings.php';
+                     }
+                     
                     ?>
+     
 
 
     </div>

@@ -2,19 +2,31 @@
 
 <div class="autorizationNOT">
 	<div class="chooseLang">
-    <a href="?glang=en&page=1&
+    <a href="?glang=en&page=1
     <?php 
+      if (isset($_GET['page'])) {
+         echo '&page=' . $_GET['page'];
+      }
+      if (isset($_POST['nick'])) {
+        echo '&nick=' . $_POST['nick'];
+      }
       if (isset($_GET['id'])) 
       { 
-        echo 'id='.$_GET['id']; 
+        echo '&id='.$_GET['id']; 
       }
     ?>"><img src="lang/uk.gif" width="33px" height="20px"></a>
      
-	 <a href="?glang=uk&page=1&
+	 <a href="?glang=uk&page=1
     <?php 
+      if (isset($_GET['page'])) {
+         echo '&page=' . $_GET['page'];
+      }
+      if (isset($_POST['nick'])) {
+        echo '&nick=' . $_POST['nick'];
+      }
       if (isset($_GET['id'])) 
       { 
-        echo 'id='.$_GET['id']; 
+        echo '&id='.$_GET['id']; 
       }
     ?>"><img src="lang/ua.gif" width="33px" height="20px"></a>
     </div>

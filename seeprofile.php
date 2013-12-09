@@ -1,3 +1,10 @@
+<?php
+  if (isset($_GET['nick'])) {
+    $_POST['nick'] = $_GET['nick'];
+  }
+?>
+
+
 <!DOCTYPE html>
 <HTML>
   <HEAD>

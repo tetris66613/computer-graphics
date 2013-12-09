@@ -5,5 +5,5 @@
         <input type="hidden" name="nick" value="<?php echo $_SESSION['nickname'] ?>">
         <input type="text" name="theme" size="20">
         <textarea name="text" rows=5></textarea><br>
-        <input type="submit" value="send">
+        <input type="submit" value="<?php echo $langdata['25'][$_SESSION['lang']]; ?>">
       </form>

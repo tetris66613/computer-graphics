@@ -23,6 +23,9 @@
     if (isset($_GET['page'])) {
       echo '&page='.$_GET['page'];
     }
+    if (isset($_POST['nick'])) {
+        echo '&nick=' . $_POST['nick'];
+      }
     if (isset($_GET['id'])) {
       echo '&id='.$_GET['id'];
     }
@@ -32,6 +35,9 @@
     if (isset($_GET['page'])) {
       echo '&page='.$_GET['page'];
     }
+    if (isset($_POST['nick'])) {
+        echo '&nick=' . $_POST['nick'];
+      }
     if (isset($_GET['id'])) {
       echo '&id='.$_GET['id'];
     }

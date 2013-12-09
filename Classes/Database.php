@@ -50,7 +50,6 @@
                     ':surname' => $surname));
   	}
   	public function loginUser($nickname, $password) {
-      global $auth_error;
   		$sql = "SELECT id, password, email, rule, name, surname FROM $this->usersTable
   		WHERE nickname = :nickname";
   		$q = $this->dbh->prepare($sql);
@@ -62,9 +61,10 @@
   		$name = $data['name'];
   		$surname = $data['surname'];
   		$email = $data['email'];
+      global $auth_errorUK, $auth_errorEN;
   		if ($stored_password === $password) {
   			if ($rule == 'banned') {
-          global $auth_errorUK, $auth_errorEN;
+          
   				$auth_errorEN = "your are banned";
           $auth_errorUK = "ви забанені";
   				include 'index.php';
@@ -81,7 +81,8 @@
                 header('location: index.php');
             }
         } else {
-        	$auth_error = 'password or nick wrong';
+        	$auth_errorEN = 'password or nick wrong';
+          $auth_errorUK = 'пароль або/і нік невірні';
         	include 'index.php';
         }
   	}
@@ -105,6 +106,14 @@
   		$data = $q->fetchAll(PDO::FETCH_ASSOC);
   		return $data;
   	}
+    protected function selectColumnWhere($column, $table, $page, $where, $val) {
+      $v = ($page - 1) * 10;
+      $sql = "SELECT $column FROM $table WHERE $where = :aid LIMIT $v, 10";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(':aid' => $val));
+      $data = $q->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
   	public function makeArticlesList($page) {
       $rows = $this->rowsInTable('articles_info');
       $pages = (($rows - $rows%10)/10) + 1;
@@ -195,7 +204,7 @@
                         ':ftUK' => $ftUK,
                         ':dt' => $date));
       $last = $this->dbh->lastInsertId();
-      $header = "article.php?id=$last";
+      $header = "article.php?id=$last&page=1";
       header("location: $header");
     }
     public function deleteArticle($id) {
@@ -315,22 +324,22 @@
                         ':ai' => $artId,
                         ':dt' => $cdate));
     }
-    public function makeCommentsList($page) {
+    public function makeCommentsList($page, $id) {
       $l = $_SESSION['lang'];
       $table = $this->commentTable.$l;
-      $rows = $this->rowsInTable($table);
-      $pages = (($rows - $rows%10)/10) + 1;
+      //$rows = $this->rowsInTable($table);
       
       
-      $data = $this->selectColumn('nick', $table, $page);
+      
+      $data = $this->selectColumnWhere('nick', $table, $page, 'artId', $id);
       $count = count($data);
-      
+      $pages = (($count - $count%10)/10) + 1;
         if ($count > 0) {
-        $theme = $this->selectColumn('theme', $table, $page);
-        $ctext = $this->selectColumn('ctext', $table, $page);
-        $nickname = $this->selectColumn('nick', $table, $page);
-        $date = $this->selectColumn('cdate', $table, $page);
-        $cid = $this->selectColumn('id', $table, $page);
+        $theme = $this->selectColumnWhere('theme', $table, $page, 'artId', $id);
+        $ctext = $this->selectColumnWhere('ctext', $table, $page, 'artId', $id);
+        $nickname = $this->selectColumnWhere('nick', $table, $page, 'artId', $id);
+        $date = $this->selectColumnWhere('cdate', $table, $page, 'artId', $id);
+        $cid = $this->selectColumnWhere('id', $table, $page, 'artId', $id);
         for ($i = 0; $i < $count; ++$i) {
           $th = $theme[$i];
           $ct = $ctext[$i];
@@ -387,6 +396,12 @@
         ':id' => $artid,
         ':n' => $nickname));
       return($q->fetch());
+    }
+    public function admDeleteAllRatingsArt($id) {
+      $sql ="DELETE FROM $this->rateTable WHERE artId = :id";
+      $q = $this->dbh->prepare($sql);
+      $q->execute(array(
+        ':id' => $id));
     }
   }
  ?>

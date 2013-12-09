@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <HTML>
   <HEAD>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <TITLE>Change article</TITLE>
     
    
